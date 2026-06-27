@@ -51,3 +51,22 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Read Docker Hub short description
+        id: dockerhub_short
+        run: |
+          {
+            echo 'value<<EOF'
+            cat dockerhub/short-description.txt
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: olorz/easymosdns-x-docker
+          short-description: ${{ steps.dockerhub_short.outputs.value }}
+          readme-filepath: ./dockerhub/README.md
+          enable-url-completion: true

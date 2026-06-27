@@ -12,6 +12,7 @@
 3. 自动更新规则
 4. 提供本地健康检查
 5. 支持 GitHub Actions 自动构建并推送到 Docker Hub
+6. 支持将 Docker Hub 简介与完整说明从仓库自动同步过去
 
 ## 最小使用方式
 
@@ -163,6 +164,11 @@ olorz/easymosdns-x-docker
 
 - `DOCKERHUB_NAMESPACE`
 - `DOCKERHUB_IMAGE`
+
+此外，Docker Hub 的说明文字现在也支持从仓库自动同步：
+
+- 短描述：`dockerhub/short-description.txt`
+- 完整说明：`dockerhub/README.md`
 
 ### 推送标签策略
 
